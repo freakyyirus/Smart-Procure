@@ -156,10 +156,10 @@
 
 ---
 
-### 💬 AI Chatbot
-> Natural language assistant for procurement queries and insights
+### � AI Recommendations
+> Smart vendor recommendations for your procurement needs
 
-![AI Chatbot](docs/screenshots/14-ai-chatbot.png)
+![AI Recommendations](docs/screenshots/14-ai-recommendations.png)
 
 ---
 

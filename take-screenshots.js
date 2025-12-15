@@ -22,8 +22,8 @@ const pages = [
     { name: '10-ai-hub', url: 'http://localhost:3000/ai', waitFor: 3000, requiresAuth: true },
     { name: '11-ocr-extraction', url: 'http://localhost:3000/ai/ocr', waitFor: 3000, requiresAuth: true },
     { name: '12-anomaly-detection', url: 'http://localhost:3000/ai/anomalies', waitFor: 3000, requiresAuth: true },
-    { name: '13-vendor-scoring', url: 'http://localhost:3000/ai/vendor-scoring', waitFor: 3000, requiresAuth: true },
-    { name: '14-ai-chatbot', url: 'http://localhost:3000/ai/chatbot', waitFor: 3000, requiresAuth: true },
+    { name: '13-vendor-scoring', url: 'http://localhost:3000/ai/vendor-scores', waitFor: 3000, requiresAuth: true },
+    { name: '14-ai-recommendations', url: 'http://localhost:3000/ai/recommendations', waitFor: 3000, requiresAuth: true },
     { name: '15-notifications', url: 'http://localhost:3000/notifications', waitFor: 3000, requiresAuth: true },
 ];
 
