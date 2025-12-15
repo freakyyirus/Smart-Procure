@@ -1,26 +1,23 @@
-<p align="center">
-  <img src="docs/screenshots/logo.png" alt="Smart Procure Logo" width="120" />
-</p>
+<div align="center">
 
-<h1 align="center">🚀 Smart Procure</h1>
+# 🚀 Smart Procure
 
-<p align="center">
-  <strong>AI-Powered Procurement Platform for Modern Enterprises</strong>
-</p>
+### AI-Powered Procurement Platform for Modern Enterprises
 
-<p align="center">
-  Replace WhatsApp & Excel chaos with intelligent, automated procurement workflows
-</p>
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?logo=next.js)](https://nextjs.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10.0-red?logo=nestjs)](https://nestjs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma)](https://www.prisma.io/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![Google Gemini](https://img.shields.io/badge/Google-Gemini%20AI-4285F4?logo=google)](https://ai.google.dev/)
 
-<p align="center">
-  <a href="#features">Features</a> •
-  <a href="#screenshots">Screenshots</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#tech-stack">Tech Stack</a> •
-  <a href="#api-docs">API Docs</a>
-</p>
+**Replace WhatsApp & Excel chaos with intelligent, automated procurement workflows**
+
+[Features](#-features) • [Screenshots](#-screenshots) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation)
 
 ---
+
+</div>
 
 ## ✨ Overview
 
@@ -40,22 +37,23 @@
 
 ## 🎯 Features
 
-### Core Procurement
+### 📦 Core Procurement Modules
 
-| Feature | Description |
-|---------|-------------|
-| 📋 **RFQ Management** | Create and send RFQs to multiple vendors simultaneously |
-| 💰 **Quote Comparison** | Side-by-side comparison with AI recommendations |
-| 📄 **Purchase Orders** | One-click PO generation from approved quotes |
+| Module | Description |
+|--------|-------------|
+| 📋 **RFQ Management** | Create and send Request for Quotations to multiple vendors simultaneously |
+| 💰 **Quote Comparison** | Side-by-side comparison with AI-powered recommendations |
+| 📄 **Purchase Orders** | One-click PO generation from approved quotes with tracking |
 | 🤝 **Vendor Portal** | Complete vendor database with performance tracking |
 | 📦 **Items Catalog** | Centralized materials and SKU management |
 | 📜 **Mandates** | Digital signature-ready payment mandates |
+| 🔔 **Notifications** | Real-time alerts for approvals and updates |
 
-### AI-Powered Features
+### 🤖 AI-Powered Features
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **OCR Extraction** | Upload quote PDFs → Auto-extract line items |
+| 🔍 **OCR Extraction** | Upload quote PDFs → Auto-extract line items using AI |
 | ⚠️ **Price Anomaly Detection** | Flag unusual pricing with AI reasoning |
 | 📊 **Vendor Scoring** | AI-calculated vendor performance scores |
 | 💡 **Smart Recommendations** | AI suggests best vendor for each item |
@@ -67,102 +65,87 @@
 
 ## 📸 Screenshots
 
-### Landing Page
-<p align="center">
-  <img src="docs/screenshots/01-landing.png" alt="Landing Page" width="800" />
-</p>
+### 🏠 Landing Page
+> Modern, professional landing page with trust-building elements and feature showcase
 
-*Modern, professional landing page with trust-building elements*
+<img src="https://placehold.co/1200x700/1a1a2e/ffffff?text=Smart+Procure%0ALanding+Page&font=roboto" alt="Landing Page" width="100%"/>
 
 ---
 
-### Dashboard
-<p align="center">
-  <img src="docs/screenshots/02-dashboard.png" alt="Dashboard" width="800" />
-</p>
+### 🔐 Login Page
+> Secure JWT-based authentication with clean, modern design
 
-*Real-time overview of RFQs, POs, and vendor activity*
+<img src="https://placehold.co/1200x700/16213e/ffffff?text=Secure+Login%0AJWT+Authentication&font=roboto" alt="Login Page" width="100%"/>
 
 ---
 
-### Vendor Management
-<p align="center">
-  <img src="docs/screenshots/03-vendors.png" alt="Vendor Management" width="800" />
-</p>
+### 📊 Dashboard
+> Real-time overview of RFQs, POs, vendor activity, and key metrics
 
-*Complete vendor database with contact info and performance metrics*
+<img src="https://placehold.co/1200x700/0f3460/ffffff?text=Dashboard%0AReal-time+Analytics&font=roboto" alt="Dashboard" width="100%"/>
 
 ---
 
-### RFQ Creation
-<p align="center">
-  <img src="docs/screenshots/04-rfqs.png" alt="RFQ Management" width="800" />
-</p>
+### 🤝 Vendors Management
+> Complete vendor database with contact info, performance metrics, and status tracking
 
-*Create RFQs and send to multiple vendors with one click*
+<img src="https://placehold.co/1200x700/533483/ffffff?text=Vendor+Management%0AComplete+Database&font=roboto" alt="Vendors" width="100%"/>
 
 ---
 
-### Quote Comparison
-<p align="center">
-  <img src="docs/screenshots/05-quotes.png" alt="Quote Comparison" width="800" />
-</p>
+### 📦 Items Catalog
+> Centralized materials and SKU management with pricing history
 
-*Side-by-side quote comparison with AI price analysis*
+<img src="https://placehold.co/1200x700/e94560/ffffff?text=Items+Catalog%0ASKU+Management&font=roboto" alt="Items" width="100%"/>
 
 ---
 
-### Purchase Orders
-<p align="center">
-  <img src="docs/screenshots/06-purchase-orders.png" alt="Purchase Orders" width="800" />
-</p>
+### 📋 RFQ Management
+> Create and send RFQs to multiple vendors with item selection
 
-*Complete PO lifecycle with delivery tracking and audit logs*
+<img src="https://placehold.co/1200x700/ff6b35/ffffff?text=RFQ+Management%0AMulti-Vendor+Quotes&font=roboto" alt="RFQs" width="100%"/>
 
 ---
 
-### AI Hub
-<p align="center">
-  <img src="docs/screenshots/07-ai-hub.png" alt="AI Hub" width="800" />
-</p>
+### 💰 Quotes Comparison
+> Side-by-side quote comparison with AI analysis and recommendations
 
-*Central dashboard for all AI-powered features*
+<img src="https://placehold.co/1200x700/f7c873/1a1a2e?text=Quote+Comparison%0AAI+Analysis&font=roboto" alt="Quotes" width="100%"/>
 
 ---
 
-### OCR Quote Extraction
-<p align="center">
-  <img src="docs/screenshots/08-ocr.png" alt="OCR Extraction" width="800" />
-</p>
+### 📄 Purchase Orders
+> Complete PO lifecycle management with delivery tracking
 
-*Upload PDF quotes and auto-extract line items with AI*
+<img src="https://placehold.co/1200x700/2ec4b6/ffffff?text=Purchase+Orders%0ALifecycle+Management&font=roboto" alt="Purchase Orders" width="100%"/>
 
 ---
 
-### Price Anomaly Detection
-<p align="center">
-  <img src="docs/screenshots/09-anomalies.png" alt="Price Anomalies" width="800" />
-</p>
+### 🧠 AI Hub
+> Central dashboard for all AI-powered procurement features
 
-*AI flags unusual pricing with explanations*
+<img src="https://placehold.co/1200x700/9b5de5/ffffff?text=AI+Hub%0APowered+by+Gemini&font=roboto" alt="AI Hub" width="100%"/>
 
 ---
 
-### Vendor Scores
-<p align="center">
-  <img src="docs/screenshots/10-vendor-scores.png" alt="Vendor Scores" width="800" />
-</p>
+### 🔍 OCR Extraction
+> Upload PDF quotes and auto-extract line items using Google Gemini AI
 
-*AI-calculated vendor performance rankings*
+<img src="https://placehold.co/1200x700/00bbf9/ffffff?text=OCR+Extraction%0APDF+to+Data&font=roboto" alt="OCR Extraction" width="100%"/>
 
 ---
 
-### AI Chatbot
-<p align="center">
-  <img src="docs/screenshots/11-chatbot.png" alt="AI Chatbot" width="800" />
-</p>
+### ⚠️ Price Anomaly Detection
+> AI flags unusual pricing with detailed explanations
 
-*Natural language assistant for procurement queries*
+<img src="https://placehold.co/1200x700/f15bb5/ffffff?text=Anomaly+Detection%0AAI+Price+Analysis&font=roboto" alt="Anomaly Detection" width="100%"/>
+
+---
+
+### 💬 AI Chatbot
+> Natural language assistant for procurement queries and insights
+
+<img src="https://placehold.co/1200x700/00f5d4/1a1a2e?text=AI+Chatbot%0ANatural+Language&font=roboto" alt="AI Chatbot" width="100%"/>
 
 ---
 
@@ -173,13 +156,14 @@
 - **Node.js** 18+ 
 - **PostgreSQL** 14+
 - **pnpm** (for frontend)
+- **Google Gemini API Key** ([Get one here](https://aistudio.google.com/))
 
 ### 1. Clone & Install
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/smart-procure.git
-cd smart-procure
+git clone https://github.com/freakyyirus/Smart-Procure.git
+cd Smart-Procure
 
 # Install backend dependencies
 cd apps/backend
@@ -190,18 +174,13 @@ cd ../frontend
 pnpm install
 ```
 
-### 2. Configure Environment
+### 2. Environment Setup
 
 **Backend** (`apps/backend/.env`):
 ```env
-# Database
 DATABASE_URL="postgresql://user:password@localhost:5432/smartprocure"
-
-# JWT
 JWT_SECRET="your-super-secret-jwt-key-min-32-chars"
-
-# AI (Get free key from https://aistudio.google.com/app/apikey)
-GEMINI_API_KEY="your-gemini-api-key"
+GEMINI_API_KEY="your-google-gemini-api-key"
 ```
 
 **Frontend** (`apps/frontend/.env.local`):
@@ -209,7 +188,7 @@ GEMINI_API_KEY="your-gemini-api-key"
 NEXT_PUBLIC_API_URL=http://localhost:3001/api
 ```
 
-### 3. Setup Database
+### 3. Database Setup
 
 ```bash
 cd apps/backend
@@ -224,27 +203,27 @@ npx prisma migrate deploy
 npx prisma db seed
 ```
 
-### 4. Start Development Servers
+### 4. Start Servers
 
 ```bash
-# Terminal 1 - Backend
+# Terminal 1 - Backend (port 3001)
 cd apps/backend
 npm run dev
 
-# Terminal 2 - Frontend
+# Terminal 2 - Frontend (port 3000)
 cd apps/frontend
 pnpm run dev
 ```
 
-### 5. Access the App
+### 5. Access Application
 
 | Service | URL |
 |---------|-----|
-| 🌐 Frontend | http://localhost:3000 |
-| 🔧 Backend API | http://localhost:3001/api |
-| 📚 API Docs (Swagger) | http://localhost:3001/api/docs |
+| 🖥️ Frontend | http://localhost:3000 |
+| 🔌 Backend API | http://localhost:3001/api |
+| 🗄️ Prisma Studio | `npx prisma studio` |
 
-### Demo Credentials
+### 🔑 Demo Login
 
 ```
 Email: admin@smartprocure.com
@@ -253,130 +232,141 @@ Password: Admin@123
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗️ Architecture
 
-### Frontend
-| Technology | Purpose |
-|------------|---------|
-| Next.js 14 | React framework with App Router |
-| TypeScript | Type safety |
-| Tailwind CSS | Utility-first styling |
-| Zustand | State management |
-| Axios | HTTP client |
-| Lucide React | Icons |
-
-### Backend
-| Technology | Purpose |
-|------------|---------|
-| NestJS | Enterprise Node.js framework |
-| Prisma | Type-safe ORM |
-| PostgreSQL | Database |
-| JWT + Passport | Authentication |
-| Google Gemini | AI features |
-| Swagger | API documentation |
-
-### AI Features
-| Feature | Powered By |
-|---------|-----------|
-| OCR Extraction | Gemini Vision |
-| Price Analysis | Gemini 2.0 Flash |
-| Recommendations | Gemini 2.0 Flash |
-| Chatbot | Gemini 2.0 Flash |
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        Frontend                              │
+│                    Next.js 14 + Tailwind                     │
+│                    http://localhost:3000                     │
+└─────────────────────────┬───────────────────────────────────┘
+                          │ REST API
+┌─────────────────────────▼───────────────────────────────────┐
+│                        Backend                               │
+│                    NestJS + Prisma                           │
+│                    http://localhost:3001                     │
+├─────────────────────────────────────────────────────────────┤
+│  Modules:                                                    │
+│  ├── Auth (JWT)        ├── RFQs          ├── AI Services    │
+│  ├── Vendors           ├── Quotes        ├── Notifications  │
+│  ├── Items             ├── POs           ├── Audit Logs     │
+│  └── Mandates          └── Integrations  └── Prisma ORM     │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+┌─────────────────────────▼───────────────────────────────────┐
+│                      PostgreSQL                              │
+│                    Database                                  │
+└─────────────────────────────────────────────────────────────┘
+                          │
+┌─────────────────────────▼───────────────────────────────────┐
+│                    External Services                         │
+│  ├── Google Gemini AI (OCR, Chatbot, Analysis)              │
+│  ├── Email Service (SMTP)                                   │
+│  └── WhatsApp Integration                                    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
 ## 📚 API Documentation
 
-Full API documentation available at: **http://localhost:3001/api/docs**
+### Authentication
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/auth/login` | POST | User login |
+| `/api/auth/register` | POST | User registration |
+| `/api/auth/me` | GET | Get current user |
 
-### Key Endpoints
+### Vendors
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/vendors` | GET | List all vendors |
+| `/api/vendors` | POST | Create vendor |
+| `/api/vendors/:id` | GET | Get vendor details |
+| `/api/vendors/:id` | PUT | Update vendor |
+| `/api/vendors/:id` | DELETE | Delete vendor |
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/login` | User login |
-| GET | `/api/vendors` | List vendors |
-| POST | `/api/rfqs` | Create RFQ |
-| GET | `/api/quotes` | List quotes |
-| POST | `/api/purchase-orders` | Create PO |
-| POST | `/api/ai/chat` | AI chatbot |
-| POST | `/api/ai/ocr/extract` | OCR extraction |
-| GET | `/api/ai/vendor-scores` | Vendor scores |
+### RFQs
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/rfqs` | GET | List all RFQs |
+| `/api/rfqs` | POST | Create RFQ |
+| `/api/rfqs/:id` | GET | Get RFQ details |
+| `/api/rfqs/:id/send` | POST | Send RFQ to vendors |
+
+### AI Endpoints
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/ai/chat` | POST | AI chatbot |
+| `/api/ai/ocr` | POST | Extract from PDF |
+| `/api/ai/anomalies` | POST | Detect price anomalies |
+| `/api/ai/vendor-scores` | POST | Get AI vendor scores |
+| `/api/ai/recommendations` | POST | Get vendor recommendations |
+| `/api/ai/forecast` | POST | Price forecasting |
+| `/api/ai/negotiate` | POST | Negotiation suggestions |
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Next.js 14, React 18, TypeScript, Tailwind CSS, Zustand |
+| **Backend** | NestJS 10, Prisma ORM, PostgreSQL, JWT |
+| **AI** | Google Gemini 2.0 Flash |
+| **Auth** | JWT + bcrypt |
+| **Styling** | Tailwind CSS + shadcn/ui |
+
+---
+
+## 📂 Project Structure
 
 ```
-smart-procure/
+Smart-Procure/
 ├── apps/
-│   ├── backend/                 # NestJS API
+│   ├── backend/              # NestJS API
 │   │   ├── src/
-│   │   │   ├── ai/              # AI services (OCR, scoring, etc.)
-│   │   │   ├── auth/            # JWT authentication
-│   │   │   ├── vendors/         # Vendor management
-│   │   │   ├── items/           # Items catalog
-│   │   │   ├── rfqs/            # RFQ management
-│   │   │   ├── quotes/          # Quote management
-│   │   │   ├── purchase-orders/ # PO management
-│   │   │   └── prisma/          # Database service
-│   │   └── prisma/
-│   │       └── schema.prisma    # Database schema
+│   │   │   ├── ai/           # AI services (Gemini)
+│   │   │   ├── auth/         # Authentication
+│   │   │   ├── vendors/      # Vendor management
+│   │   │   ├── items/        # Items catalog
+│   │   │   ├── rfqs/         # RFQ management
+│   │   │   ├── quotes/       # Quote management
+│   │   │   ├── purchase-orders/
+│   │   │   ├── mandates/
+│   │   │   └── notifications/
+│   │   └── prisma/           # Database schema
 │   │
-│   └── frontend/                # Next.js App
-│       ├── app/                 # App Router pages
-│       │   ├── dashboard/       # Main dashboard
-│       │   ├── vendors/         # Vendor pages
-│       │   ├── rfqs/            # RFQ pages
-│       │   ├── quotes/          # Quote pages
-│       │   ├── purchase-orders/ # PO pages
-│       │   └── ai/              # AI feature pages
-│       ├── components/          # Reusable components
-│       └── lib/                 # Utilities & API client
+│   └── frontend/             # Next.js App
+│       ├── app/              # Pages (App Router)
+│       ├── components/       # React components
+│       └── lib/              # Utilities
 │
-└── docs/
-    └── screenshots/             # App screenshots
+└── README.md
 ```
-
----
-
-## 🔐 Security Features
-
-- ✅ JWT-based authentication
-- ✅ Bcrypt password hashing
-- ✅ Helmet security headers
-- ✅ CORS configuration
-- ✅ Rate limiting
-- ✅ Input validation with class-validator
-- ✅ Prisma parameterized queries (SQL injection prevention)
 
 ---
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
-## 🙏 Acknowledgments
+<div align="center">
 
-- [Google Gemini](https://ai.google.dev/) - AI capabilities
-- [NestJS](https://nestjs.com/) - Backend framework
-- [Next.js](https://nextjs.org/) - Frontend framework
-- [Prisma](https://prisma.io/) - Database ORM
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
+**Built with ❤️ for Modern Procurement**
 
----
+[⬆ Back to Top](#-smart-procure)
 
-<p align="center">
-  Made with ❤️ for modern procurement teams
-</p>
+</div>

@@ -21,7 +21,8 @@
     "prisma:studio": "npm run prisma:studio --workspace=apps/backend"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "puppeteer": "^24.33.0"
   },
   "engines": {
     "node": ">=18.0.0",
