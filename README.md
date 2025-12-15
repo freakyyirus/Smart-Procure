@@ -68,84 +68,105 @@
 ### 🏠 Landing Page
 > Modern, professional landing page with trust-building elements and feature showcase
 
-<img src="https://placehold.co/1200x700/1a1a2e/ffffff?text=Smart+Procure%0ALanding+Page&font=roboto" alt="Landing Page" width="100%"/>
+![Landing Page](docs/screenshots/01-landing-page.png)
 
 ---
 
 ### 🔐 Login Page
 > Secure JWT-based authentication with clean, modern design
 
-<img src="https://placehold.co/1200x700/16213e/ffffff?text=Secure+Login%0AJWT+Authentication&font=roboto" alt="Login Page" width="100%"/>
+![Login Page](docs/screenshots/02-login-page.png)
 
 ---
 
 ### 📊 Dashboard
 > Real-time overview of RFQs, POs, vendor activity, and key metrics
 
-<img src="https://placehold.co/1200x700/0f3460/ffffff?text=Dashboard%0AReal-time+Analytics&font=roboto" alt="Dashboard" width="100%"/>
+![Dashboard](docs/screenshots/03-dashboard.png)
 
 ---
 
 ### 🤝 Vendors Management
 > Complete vendor database with contact info, performance metrics, and status tracking
 
-<img src="https://placehold.co/1200x700/533483/ffffff?text=Vendor+Management%0AComplete+Database&font=roboto" alt="Vendors" width="100%"/>
+![Vendors](docs/screenshots/04-vendors.png)
 
 ---
 
 ### 📦 Items Catalog
 > Centralized materials and SKU management with pricing history
 
-<img src="https://placehold.co/1200x700/e94560/ffffff?text=Items+Catalog%0ASKU+Management&font=roboto" alt="Items" width="100%"/>
+![Items](docs/screenshots/05-items.png)
 
 ---
 
 ### 📋 RFQ Management
 > Create and send RFQs to multiple vendors with item selection
 
-<img src="https://placehold.co/1200x700/ff6b35/ffffff?text=RFQ+Management%0AMulti-Vendor+Quotes&font=roboto" alt="RFQs" width="100%"/>
+![RFQs](docs/screenshots/06-rfqs.png)
 
 ---
 
 ### 💰 Quotes Comparison
 > Side-by-side quote comparison with AI analysis and recommendations
 
-<img src="https://placehold.co/1200x700/f7c873/1a1a2e?text=Quote+Comparison%0AAI+Analysis&font=roboto" alt="Quotes" width="100%"/>
+![Quotes](docs/screenshots/07-quotes.png)
 
 ---
 
 ### 📄 Purchase Orders
 > Complete PO lifecycle management with delivery tracking
 
-<img src="https://placehold.co/1200x700/2ec4b6/ffffff?text=Purchase+Orders%0ALifecycle+Management&font=roboto" alt="Purchase Orders" width="100%"/>
+![Purchase Orders](docs/screenshots/08-purchase-orders.png)
+
+---
+
+### 📜 Mandates
+> Digital payment mandates with signature support
+
+![Mandates](docs/screenshots/09-mandates.png)
 
 ---
 
 ### 🧠 AI Hub
 > Central dashboard for all AI-powered procurement features
 
-<img src="https://placehold.co/1200x700/9b5de5/ffffff?text=AI+Hub%0APowered+by+Gemini&font=roboto" alt="AI Hub" width="100%"/>
+![AI Hub](docs/screenshots/10-ai-hub.png)
 
 ---
 
 ### 🔍 OCR Extraction
 > Upload PDF quotes and auto-extract line items using Google Gemini AI
 
-<img src="https://placehold.co/1200x700/00bbf9/ffffff?text=OCR+Extraction%0APDF+to+Data&font=roboto" alt="OCR Extraction" width="100%"/>
+![OCR Extraction](docs/screenshots/11-ocr-extraction.png)
 
 ---
 
 ### ⚠️ Price Anomaly Detection
 > AI flags unusual pricing with detailed explanations
 
-<img src="https://placehold.co/1200x700/f15bb5/ffffff?text=Anomaly+Detection%0AAI+Price+Analysis&font=roboto" alt="Anomaly Detection" width="100%"/>
+![Anomaly Detection](docs/screenshots/12-anomaly-detection.png)
+
+---
+
+### � Vendor Scoring
+> AI-calculated vendor performance rankings and insights
+
+![Vendor Scoring](docs/screenshots/13-vendor-scoring.png)
 
 ---
 
 ### 💬 AI Chatbot
 > Natural language assistant for procurement queries and insights
 
-<img src="https://placehold.co/1200x700/00f5d4/1a1a2e?text=AI+Chatbot%0ANatural+Language&font=roboto" alt="AI Chatbot" width="100%"/>
+![AI Chatbot](docs/screenshots/14-ai-chatbot.png)
+
+---
+
+### 🔔 Notifications
+> Real-time alerts and notification center
+
+![Notifications](docs/screenshots/15-notifications.png)
 
 ---
 
