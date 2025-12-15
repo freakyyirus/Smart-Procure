@@ -1,0 +1,699 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Company Model
+model Company {
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  phone       String?
+  gstin       String?  @unique
+  address     String?
+  city        String?
+  state       String?
+  pincode     String?
+  logo        String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       User[]
+  vendors     Vendor[]
+  items       Item[]
+  rfqs        RFQ[]
+  pos         PurchaseOrder[]
+  mandates    Mandate[]
+  auditLogs   AuditLog[]
+
+  @@map("companies")
+}
+
+// User Model
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  firstName   String
+  lastName    String
+  role        UserRole @default(USER)
+  phone       String?
+  googleId    String?  @unique
+  isActive    Boolean  @default(true)
+  companyId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  rfqs        RFQ[]
+  pos         PurchaseOrder[]
+  auditLogs   AuditLog[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  OWNER
+  MANAGER
+  USER
+}
+
+// Vendor Model
+model Vendor {
+  id                String   @id @default(uuid())
+  name              String
+  email             String
+  phone             String
+  gstin             String?
+  address           String?
+  city              String?
+  state             String?
+  pincode           String?
+  contactPerson     String?
+  materialsSupplied String[] // Array of materials
+  vendorScore       Float?   @default(0)
+  isActive          Boolean  @default(true)
+  companyId         String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  rfqs              RFQVendor[]
+  quotes            Quote[]
+  pos               PurchaseOrder[]
+  mandates          Mandate[]
+  deliveries        Delivery[]
+  vendorScores      VendorScore[] @relation("VendorScores")
+  vendorRecommendations VendorRecommendation[] @relation("VendorRecommendations")
+  priceHistory      PriceHistory[] @relation("VendorPriceHistory")
+
+  @@map("vendors")
+}
+
+// Item Model
+model Item {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  category    String
+  unit        String   // kg, liter, piece, etc.
+  hsn         String?
+  defaultGst  Float    @default(18)
+  isActive    Boolean  @default(true)
+  companyId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  rfqItems    RFQItem[]
+  poLineItems POLineItem[]
+  priceHistory PriceHistory[] @relation("ItemPriceHistory")
+
+  @@map("items")
+}
+
+// RFQ Model
+model RFQ {
+  id              String      @id @default(uuid())
+  rfqNumber       String      @unique
+  title           String
+  description     String?
+  status          RFQStatus   @default(DRAFT)
+  dueDate         DateTime?
+  createdById     String
+  companyId       String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  company         Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdBy       User        @relation(fields: [createdById], references: [id])
+  items           RFQItem[]
+  vendors         RFQVendor[]
+  quotes          Quote[]
+
+  @@map("rfqs")
+}
+
+enum RFQStatus {
+  DRAFT
+  SENT
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+// RFQ Items (Line Items)
+model RFQItem {
+  id          String   @id @default(uuid())
+  rfqId       String
+  itemId      String
+  quantity    Float
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  rfq         RFQ      @relation(fields: [rfqId], references: [id], onDelete: Cascade)
+  item        Item     @relation(fields: [itemId], references: [id])
+
+  @@map("rfq_items")
+}
+
+// RFQ Vendors (Many-to-Many)
+model RFQVendor {
+  id          String   @id @default(uuid())
+  rfqId       String
+  vendorId    String
+  sentAt      DateTime?
+  viewedAt    DateTime?
+  createdAt   DateTime @default(now())
+
+  rfq         RFQ      @relation(fields: [rfqId], references: [id], onDelete: Cascade)
+  vendor      Vendor   @relation(fields: [vendorId], references: [id])
+
+  @@unique([rfqId, vendorId])
+  @@map("rfq_vendors")
+}
+
+// Quote Model
+model Quote {
+  id              String      @id @default(uuid())
+  quoteNumber     String      @unique
+  rfqId           String
+  vendorId        String
+  basePrice       Float
+  gst             Float
+  gstAmount       Float
+  transportCost   Float       @default(0)
+  landedCost      Float       // Auto-calculated: basePrice + gstAmount + transportCost
+  deliveryDays    Int?
+  terms           String?
+  notes           String?
+  status          QuoteStatus @default(SUBMITTED)
+  isApproved      Boolean     @default(false)
+  approvedAt      DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  rfq             RFQ         @relation(fields: [rfqId], references: [id], onDelete: Cascade)
+  vendor          Vendor      @relation(fields: [vendorId], references: [id])
+  po              PurchaseOrder?
+
+  @@map("quotes")
+}
+
+enum QuoteStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+// Purchase Order Model
+model PurchaseOrder {
+  id              String    @id @default(uuid())
+  poNumber        String    @unique
+  quoteId         String?   @unique
+  vendorId        String
+  companyId       String
+  createdById     String
+  totalAmount     Float
+  gstAmount       Float
+  grandTotal      Float
+  status          POStatus  @default(DRAFT)
+  terms           String?
+  notes           String?
+  paymentTerms    String?
+  deliveryAddress String?
+  expectedDeliveryDate DateTime?
+  pdfUrl          String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  company         Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  vendor          Vendor    @relation(fields: [vendorId], references: [id])
+  createdBy       User      @relation(fields: [createdById], references: [id])
+  quote           Quote?    @relation(fields: [quoteId], references: [id])
+  lineItems       POLineItem[]
+  deliveries      Delivery[]
+  invoices        Invoice[]
+  mandate         Mandate?
+
+  @@map("purchase_orders")
+}
+
+enum POStatus {
+  DRAFT
+  SENT
+  ACKNOWLEDGED
+  IN_PROGRESS
+  DELIVERED
+  COMPLETED
+  CANCELLED
+}
+
+// PO Line Items
+model POLineItem {
+  id          String   @id @default(uuid())
+  poId        String
+  itemId      String
+  quantity    Float
+  unitPrice   Float
+  gst         Float
+  gstAmount   Float
+  totalAmount Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  po          PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  item        Item     @relation(fields: [itemId], references: [id])
+
+  @@map("po_line_items")
+}
+
+// Delivery Model
+model Delivery {
+  id              String         @id @default(uuid())
+  poId            String
+  vendorId        String
+  deliveryNumber  String         @unique
+  deliveryDate    DateTime?
+  receivedDate    DateTime?
+  status          DeliveryStatus @default(PENDING)
+  notes           String?
+  receivedBy      String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  po              PurchaseOrder  @relation(fields: [poId], references: [id], onDelete: Cascade)
+  vendor          Vendor         @relation(fields: [vendorId], references: [id])
+
+  @@map("deliveries")
+}
+
+enum DeliveryStatus {
+  PENDING
+  IN_TRANSIT
+  DELIVERED
+  PARTIALLY_DELIVERED
+  REJECTED
+}
+
+// Invoice Model
+model Invoice {
+  id              String        @id @default(uuid())
+  poId            String
+  invoiceNumber   String        @unique
+  invoiceDate     DateTime
+  dueDate         DateTime?
+  amount          Float
+  gstAmount       Float
+  totalAmount     Float
+  status          InvoiceStatus @default(PENDING)
+  paidDate        DateTime?
+  fileUrl         String?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  po              PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+
+  @@map("invoices")
+}
+
+enum InvoiceStatus {
+  PENDING
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+// 🆕 Mandate Model (Payment Agreement System)
+model Mandate {
+  id                    String        @id @default(uuid())
+  mandateNumber         String        @unique
+  poId                  String        @unique
+  vendorId              String
+  companyId             String
+  totalAmount           Float
+  dueDate               DateTime
+  installments          Int           @default(1)
+  installmentAmount     Float?
+  autoDeductEnabled     Boolean       @default(false)
+  mandateStatus         MandateStatus @default(PENDING)
+  terms                 String?
+  bankDetails           String?       // JSON string for bank/UPI details
+  signedByVendorAt      DateTime?
+  signedByCompanyAt     DateTime?
+  vendorSignature       String?       // URL or base64
+  companySignature      String?       // URL or base64
+  executedAt            DateTime?
+  failureReason         String?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  po                    PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  vendor                Vendor        @relation(fields: [vendorId], references: [id])
+  company               Company       @relation(fields: [companyId], references: [id])
+
+  @@map("mandates")
+}
+
+enum MandateStatus {
+  PENDING
+  VENDOR_SIGNED
+  COMPANY_SIGNED
+  ACTIVE
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+// Audit Log Model
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  companyId   String
+  action      String   // e.g., "CREATE_RFQ", "APPROVE_QUOTE", "SIGN_MANDATE"
+  entity      String   // e.g., "RFQ", "Quote", "Mandate"
+  entityId    String
+  metadata    String?  // JSON string for additional data
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}
+
+// Notification Model
+model Notification {
+  id          String           @id @default(uuid())
+  userId      String?
+  companyId   String
+  type        NotificationType
+  title       String
+  message     String
+  link        String?
+  isRead      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+
+  @@index([companyId, isRead])
+  @@map("notifications")
+}
+
+enum NotificationType {
+  RFQ_RECEIVED
+  QUOTE_SUBMITTED
+  QUOTE_APPROVED
+  PO_SENT
+  PO_ACKNOWLEDGED
+  DELIVERY_UPDATE
+  PAYMENT_DUE
+  MANDATE_SIGNED
+  AI_INSIGHT
+  PRICE_ALERT
+  SYSTEM
+}
+
+// ==================== AI FEATURES ====================
+
+// OCR Extraction Model - Stores extracted data from quote PDFs/images
+model OCRExtraction {
+  id              String   @id @default(uuid())
+  companyId       String
+  rfqId           String?
+  fileName        String
+  fileUrl         String?
+  fileType        String?  // PDF, PNG, JPG, etc.
+  rawExtraction   String?  // Raw text extracted by OCR
+  extractedData   String?  // JSON string with structured quote data
+  confidence      Float?   // Overall confidence score 0-1
+  status          OCRStatus @default(PENDING)
+  error           String?
+  modelUsed       String?  // e.g., "gpt-4-vision-preview"
+  tokensUsed      Int?
+  processingTime  Int?     // milliseconds
+  createdAt       DateTime @default(now())
+  processedAt     DateTime?
+  approvedAt      DateTime?
+  approvedBy      String?
+
+  @@index([companyId, status])
+  @@map("ocr_extractions")
+}
+
+enum OCRStatus {
+  PENDING
+  PROCESSING
+  EXTRACTED
+  APPROVED
+  REJECTED
+  FAILED
+}
+
+// AI Price Anomaly Detection
+model PriceAnomaly {
+  id              String        @id @default(uuid())
+  companyId       String
+  quoteId         String
+  itemId          String?
+  detectedPrice   Float
+  expectedPrice   Float
+  deviation       Float         // Percentage deviation
+  severity        AnomalySeverity
+  explanation     String        // Human-readable explanation
+  historicalData  String?       // JSON with comparison data
+  isAcknowledged  Boolean       @default(false)
+  acknowledgedBy  String?
+  acknowledgedAt  DateTime?
+  createdAt       DateTime      @default(now())
+
+  @@index([companyId, createdAt])
+  @@map("price_anomalies")
+}
+
+enum AnomalySeverity {
+  NORMAL
+  HIGH
+  EXTREMELY_HIGH
+}
+
+// AI Vendor Score - Calculated vendor rankings
+model VendorScore {
+  id                    String   @id @default(uuid())
+  vendorId              String
+  companyId             String
+  overallScore          Float    // 0-100
+  tier                  VendorTier
+  deliveryScore         Float    // On-time delivery rate
+  priceScore            Float    // Price competitiveness
+  qualityScore          Float    // Based on rejections
+  responseScore         Float    // Quote response time
+  consistencyScore      Float    // Price consistency
+  explanation           String   // Human-readable explanation
+  dataPoints            Int      // Number of data points used
+  calculatedAt          DateTime @default(now())
+  validUntil            DateTime // Score expiry
+
+  vendor                Vendor   @relation("VendorScores", fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@unique([vendorId, companyId])
+  @@index([companyId, overallScore])
+  @@map("vendor_scores")
+}
+
+enum VendorTier {
+  A
+  B
+  C
+}
+
+// AI Vendor Recommendation
+model VendorRecommendation {
+  id              String   @id @default(uuid())
+  companyId       String
+  rfqId           String?
+  itemId          String?
+  vendorId        String
+  rank            Int
+  score           Float
+  reason          String   // Why this vendor is recommended
+  factors         String?  // JSON with scoring factors
+  isSelected      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  vendor          Vendor   @relation("VendorRecommendations", fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, rfqId])
+  @@map("vendor_recommendations")
+}
+
+// Negotiation Session Model - AI-assisted negotiations
+model NegotiationSession {
+  id              String   @id @default(uuid())
+  companyId       String
+  vendorId        String
+  rfqId           String?
+  quoteId         String?
+  currentPrice    Float
+  targetPrice     Float?
+  aiSuggestedPrice Float?
+  status          NegotiationStatus @default(ACTIVE)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  messages        NegotiationMessage[]
+
+  @@index([companyId, status])
+  @@map("negotiation_sessions")
+}
+
+enum NegotiationStatus {
+  ACTIVE
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+// Negotiation Messages - Individual messages in a negotiation
+model NegotiationMessage {
+  id              String   @id @default(uuid())
+  sessionId       String
+  role            MessageRole
+  content         String
+  isAiGenerated   Boolean  @default(false)
+  isEdited        Boolean  @default(false)
+  originalContent String?  // Original AI content if edited
+  sentAt          DateTime?
+  createdAt       DateTime @default(now())
+
+  session         NegotiationSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("negotiation_messages")
+}
+
+enum MessageRole {
+  USER
+  VENDOR
+  AI_SUGGESTION
+}
+
+// Price History Model - Historical price data for forecasting
+model PriceHistory {
+  id          String   @id @default(uuid())
+  itemId      String
+  vendorId    String?
+  companyId   String?
+  price       Float
+  quantity    Float?
+  source      PriceSource
+  quoteId     String?
+  poId        String?
+  recordedAt  DateTime @default(now())
+  metadata    String?  // JSON string
+
+  item        Item     @relation("ItemPriceHistory", fields: [itemId], references: [id], onDelete: Cascade)
+  vendor      Vendor?  @relation("VendorPriceHistory", fields: [vendorId], references: [id], onDelete: SetNull)
+
+  @@index([itemId, recordedAt])
+  @@index([companyId, itemId])
+  @@map("price_history")
+}
+
+enum PriceSource {
+  QUOTE
+  PO
+  MANUAL
+}
+
+// Price Forecast - AI-generated price predictions
+model PriceForecast {
+  id              String   @id @default(uuid())
+  itemId          String
+  companyId       String
+  forecastDate    DateTime // Date the forecast is for
+  predictedPrice  Float
+  confidenceLow   Float    // Lower bound
+  confidenceHigh  Float    // Upper bound
+  confidence      Float    // Confidence percentage 0-100
+  trend           PriceTrend
+  dataPointsUsed  Int
+  modelUsed       String?
+  explanation     String?
+  createdAt       DateTime @default(now())
+  validUntil      DateTime
+
+  @@unique([itemId, companyId, forecastDate])
+  @@index([companyId, itemId])
+  @@map("price_forecasts")
+}
+
+enum PriceTrend {
+  UP
+  DOWN
+  STABLE
+}
+
+// AI Usage Log - Track all AI API calls for billing/audit
+model AIUsageLog {
+  id              String   @id @default(uuid())
+  companyId       String
+  userId          String?
+  feature         AIFeature
+  model           String   // e.g., "gpt-4-vision-preview"
+  inputTokens     Int
+  outputTokens    Int
+  totalTokens     Int
+  estimatedCost   Float    // in USD
+  latencyMs       Int
+  success         Boolean
+  error           String?
+  metadata        String?  // JSON with additional context
+  createdAt       DateTime @default(now())
+
+  @@index([companyId, createdAt])
+  @@index([companyId, feature])
+  @@map("ai_usage_logs")
+}
+
+enum AIFeature {
+  OCR_EXTRACTION
+  PRICE_ANOMALY
+  VENDOR_SCORING
+  VENDOR_RECOMMENDATION
+  NEGOTIATION_COPILOT
+  PRICE_FORECAST
+}
+
+// Vendor Performance Model - Aggregate performance metrics
+model VendorPerformance {
+  id                    String   @id @default(uuid())
+  vendorId              String
+  companyId             String
+  totalOrders           Int      @default(0)
+  completedOrders       Int      @default(0)
+  onTimeDeliveries      Int      @default(0)
+  lateDeliveries        Int      @default(0)
+  rejectedDeliveries    Int      @default(0)
+  totalQuotes           Int      @default(0)
+  acceptedQuotes        Int      @default(0)
+  avgResponseHours      Float    @default(0)
+  avgPriceDeviation     Float    @default(0) // vs market average
+  lastOrderDate         DateTime?
+  lastCalculatedAt      DateTime @default(now())
+  
+  @@unique([vendorId, companyId])
+  @@map("vendor_performance")
+}
