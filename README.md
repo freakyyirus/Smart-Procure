@@ -13,7 +13,7 @@
 
 **Replace WhatsApp & Excel chaos with intelligent, automated procurement workflows**
 
-[Features](#-features) • [Screenshots](#-screenshots) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation)
+[Features](#-features) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation)
 
 ---
 
